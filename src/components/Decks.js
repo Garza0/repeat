@@ -1,30 +1,45 @@
 import React from 'react';
+import { decks } from '../mock/decks';
+import { Link, Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import CreateDeck from './CreateDeck';
 
 export default function Decks() {
-  return (
-    <div>
-      <div className="list-group">
+  const decksList = () => {
+    return decks.map((currentDeck, i) => {
+      return (
         <button
+          key={i}
           type="button"
-          class="list-group-item list-group-item-action bg-primary text-light mb-3"
+          className="list-group-item list-group-item-action"
         >
-          Create New Deck
+          {currentDeck.description}
         </button>
-      </div>
-      <div class="list-group">
-        <button type="button" class="list-group-item list-group-item-action">
-          Cras justo odio
-        </button>
-        <button type="button" class="list-group-item list-group-item-action">
-          Dapibus ac facilisis in
-        </button>
-        <button type="button" class="list-group-item list-group-item-action">
-          Morbi leo risus
-        </button>
-        <button type="button" class="list-group-item list-group-item-action">
-          Porta ac consectetur ac
-        </button>
-      </div>
-    </div>
+      );
+    });
+  };
+
+  return (
+    <Router>
+      <Switch>
+        <Route path="/" exact>
+          <div>
+            <div className="list-group">
+              <Link to="/add_deck">
+                <button
+                  type="button"
+                  className="list-group-item list-group-item-action bg-primary text-light mb-3"
+                >
+                  + Create New Deck
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className="list-group">{decksList()}</div>
+        </Route>
+        <Route path="/add_deck">
+          <CreateDeck />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
