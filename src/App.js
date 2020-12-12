@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './components/Navbar';
-import Decks from './components/Decks';
-import Cards from './components/Cards';
-import CreateCard from './components/CreateCard';
+import Navbar from './components/header/Navbar';
+import Decks from './components/decks/Decks';
+import Cards from './components/cards/Cards';
+import CreateCard from './components/cards/CreateCard';
+import CreateDeck from './components/decks/CreateDeck';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Navbar />
         <br />
         <Route path="/" exact component={Decks} />
+        <Route path="/add_deck" component={CreateDeck} />
         <Route path="/cards" exact component={Cards} />
         <Route path="/add_card" component={CreateCard} />
       </div>

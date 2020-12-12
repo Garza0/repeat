@@ -1,9 +1,17 @@
-import React from 'react';
-import { cards } from '../mock/cards';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreator } from '../../store/actions';
 
 export default function Cards() {
-  const decksList = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(actionCreator.initCards());
+  }, [dispatch]);
+
+  const cards = useSelector((state) => state.cardsReducer.cards);
+  console.log(cards);
+  const cardsList = () => {
     return cards.map((currentCard, i) => {
       return (
         <button
@@ -29,7 +37,7 @@ export default function Cards() {
           </button>
         </Link>
       </div>
-      <div className="list-group">{decksList()}</div>
+      <div className="list-group">{cardsList()}</div>
     </div>
   );
 }

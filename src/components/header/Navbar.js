@@ -15,6 +15,11 @@ function Navbar() {
             </NavLink>
           </li>
           <li className="navbar-item">
+            <NavLink to="/add_deck" className="nav-link">
+              Add Deck
+            </NavLink>
+          </li>
+          <li className="navbar-item">
             <NavLink to="/cards" className="nav-link">
               Cards
             </NavLink>

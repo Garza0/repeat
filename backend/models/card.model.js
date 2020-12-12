@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 
 const cardSchema = new Schema(
   {
-    front: { type: String, value: String },
-    back: { type: String, value: String },
+    front: { type: { type: String }, value: String },
+    back: { type: { type: String }, value: String },
     date: { type: Date, required: true },
     nextShow: Date,
     decks: Array,
