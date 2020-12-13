@@ -14,4 +14,11 @@ const getCards = async () => {
   return cards;
 };
 
-export { getDecks, getCards };
+const postDeck = async (deck) => {
+  const rawResponse = await axios
+    .post('http://localhost:5000/decks/add', deck)
+    .then((res) => res.data);
+  return rawResponse;
+};
+
+export { getDecks, getCards, postDeck };
