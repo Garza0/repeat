@@ -1,38 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { actionCreator } from '../../store/actions';
 
 function CreateCard() {
+  const dispatch = useDispatch();
+
+  const initialCardState = {
+    decks: [],
+    showDates: [],
+    date: new Date(),
+    front: { type: 'text', value: '' },
+    back: { type: 'text', value: '' },
+    nextShow: new Date(),
+    learnLevel: 0,
+  };
+
+  const [cardInfo, setCardInfo] = useState(initialCardState);
+
+  function onSubmit(e) {
+    e.preventDefault();
+
+    const card = {
+      decks: cardInfo.decks,
+      showDates: cardInfo.showDates,
+      date: cardInfo.date,
+      front: cardInfo.front,
+      back: cardInfo.back,
+      nextShow: cardInfo.nextShow,
+      learnLevel: cardInfo.learnLevel,
+    };
+
+    setCardInfo(initialCardState);
+
+    dispatch(actionCreator.addCard(card));
+  }
+
+  function onChangeFront(e) {
+    setCardInfo({
+      ...cardInfo,
+      front: { ...cardInfo.front, value: e.target.value },
+    });
+  }
+
+  function onChangeBack(e) {
+    setCardInfo({
+      ...cardInfo,
+      back: { ...cardInfo.back, value: e.target.value },
+    });
+  }
+
   return (
     <div>
-      <label htmlFor="front">Front</label>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          id="front"
-          aria-describedby="basic-addon3"
-        />
-      </div>
-      <label htmlFor="back">Back</label>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          id="back"
-          aria-describedby="basic-addon3"
-        />
-      </div>
-      <label htmlFor="usage">Usage</label>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          id="usage"
-          aria-describedby="basic-addon3"
-        />
-      </div>
-      <button type="button" className="btn btn-primary btn-lg btn-block">
-        Save
-      </button>
+      <form onSubmit={onSubmit}>
+        <div className="form-group">
+          <label>Front</label>
+          <input
+            type="text"
+            className="form-control"
+            onChange={onChangeFront}
+            value={cardInfo.front.value}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Back</label>
+          <input
+            type="text"
+            className="form-control"
+            onChange={onChangeBack}
+            value={cardInfo.back.value}
+          />
+        </div>
+
+        <div className="form-group">
+          <input
+            type="submit"
+            value="Create Card"
+            className="btn btn-primary"
+          />
+        </div>
+      </form>
     </div>
   );
 }

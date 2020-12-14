@@ -20,6 +20,6 @@ export const actionCreator = {
   deleteDeck: (data) => ({ type: actionTypes.DELETE_DECK, data }), //data - deck id
   initCards: () => ({ type: actionTypes.INIT_CARDS }),
   addCard: (data) => ({ type: actionTypes.ADD_CARD, data }), //data - card obj
-  updaCard: (data) => ({ type: actionTypes.UPDATE_CARD, data }), //data - arr [0] - id, [1] - card obj
+  updateCard: (data) => ({ type: actionTypes.UPDATE_CARD, data }), //data - arr [0] - id, [1] - card obj
   deleteCard: (data) => ({ type: actionTypes.DELETE_CARD, data }), //data - card id
 };

@@ -2,7 +2,6 @@ import { actionTypes } from '../actions';
 import { getDecks, postDeck } from '../../services';
 
 const middlewareDecks = (store) => (next) => async (action) => {
-  console.log(action);
   switch (action.type) {
     case actionTypes.INIT_DECKS:
       try {
