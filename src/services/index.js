@@ -28,4 +28,11 @@ const postCard = async (card) => {
   return rawResponse;
 };
 
-export { getDecks, getCards, postDeck, postCard };
+const deleteDeck = async (deckId) => {
+  const rawResponse = await axios
+    .delete('http://localhost:5000/decks/' + deckId)
+    .then((res) => res.data);
+  return rawResponse;
+};
+
+export { getDecks, getCards, postDeck, postCard, deleteDeck };

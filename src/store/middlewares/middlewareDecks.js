@@ -1,5 +1,5 @@
 import { actionTypes } from '../actions';
-import { getDecks, postDeck } from '../../services';
+import { getDecks, postDeck, deleteDeck } from '../../services';
 
 const middlewareDecks = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -28,6 +28,18 @@ const middlewareDecks = (store) => (next) => async (action) => {
         console.log(e.response);
       }
 
+      break;
+    case actionTypes.DELETE_DECK:
+      try {
+        await deleteDeck(action.data);
+        const data = await getDecks();
+        store.dispatch({
+          type: actionTypes.GET_DECKS_SUCCESS,
+          data,
+        });
+      } catch (e) {
+        console.log(e.response);
+      }
       break;
     default:
       next(action);

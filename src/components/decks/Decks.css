@@ -1,0 +1,24 @@
+.deck_list__item {
+  width: 260px;
+  height: 56px;
+  background-color: #47494e;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0 20px;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* position: relative; */
+}
+
+.deck_list__item--active {
+  border: 1px solid #7fcdfa;
+}
+
+.more_btn {
+  position: relative;
+}

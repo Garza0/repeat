@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import './Decks.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreator } from '../../store/actions';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import EditDeleteModal from '../modal/EditDeleteModal';
 
 export default function Decks() {
   const dispatch = useDispatch();
@@ -10,18 +13,31 @@ export default function Decks() {
     dispatch(actionCreator.initDecks());
   }, [dispatch]);
 
+  const [showModal, setShowModal] = useState(false);
+  const [clickedElementId, setClickedElementId] = useState(null);
+
   const decks = useSelector((state) => state.decksReducer.decks);
+
+  const onModalClick = (e) => {
+    setClickedElementId(Number(e.target.closest('div').id));
+    setShowModal(!showModal);
+  };
 
   const decksList = () => {
     return decks.map((currentDeck, i) => {
       return (
-        <button
-          key={i}
-          type="button"
-          className="list-group-item list-group-item-action"
-        >
+        <div key={i} className="deck_list__item">
           {currentDeck.description}
-        </button>
+          <div id={i} onClick={onModalClick} className="more_btn">
+            <MoreVertIcon />
+            <EditDeleteModal
+              deckId={currentDeck._id}
+              showById={clickedElementId}
+              id={i}
+              show={showModal}
+            />
+          </div>
+        </div>
       );
     });
   };
@@ -31,12 +47,7 @@ export default function Decks() {
       <div>
         <div className="list-group">
           <Link to="/add_deck">
-            <button
-              type="button"
-              className="list-group-item list-group-item-action bg-primary text-light mb-3"
-            >
-              + Create New Deck
-            </button>
+            <div className="deck_list__item">+ Create New Deck</div>
           </Link>
         </div>
       </div>

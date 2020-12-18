@@ -1,0 +1,21 @@
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-item {
+  list-style: none;
+  text-align: center;
+  line-height: 30px;
+}
+
+.navbar-item--active {
+  background-color: #63696d;
+  border-radius: 8px;
+}
+
+.navbar-item > a {
+  color: #fff;
+  padding: 10px 15px;
+  text-decoration: none;
+}
