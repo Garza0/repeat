@@ -14,13 +14,10 @@ export default function Cards() {
   const cardsList = () => {
     return cards.map((currentCard, i) => {
       return (
-        <button
-          key={i}
-          type="button"
-          className="list-group-item list-group-item-action"
-        >
-          {currentCard.front.value}
-        </button>
+        <div key={i} className="list-group-item list-group-item-action">
+          {currentCard.front.value} | {currentCard.back.value} |
+          {currentCard.decks.join(' ')} | {currentCard.learnLevel}
+        </div>
       );
     });
   };

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Decks.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditDeleteModal from '../modal/EditDeleteModal';
+import CreateDeckModal from './CreateDeckModal';
 
 export default function Decks() {
   const dispatch = useDispatch();
@@ -21,6 +21,10 @@ export default function Decks() {
   const onModalClick = (e) => {
     setClickedElementId(Number(e.target.closest('div').id));
     setShowModal(!showModal);
+  };
+
+  const onCreateDeckClick = (e) => {
+    dispatch(actionCreator.changeCreateDeckModalVisible(true));
   };
 
   const decksList = () => {
@@ -46,9 +50,9 @@ export default function Decks() {
     <>
       <div>
         <div className="list-group">
-          <Link to="/add_deck">
-            <div className="deck_list__item">+ Create New Deck</div>
-          </Link>
+          <div className="deck_list__item" onClick={onCreateDeckClick}>
+            + Create New Deck <CreateDeckModal />
+          </div>
         </div>
       </div>
       <div className="list-group">{decksList()}</div>

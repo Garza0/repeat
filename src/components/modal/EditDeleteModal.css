@@ -1,4 +1,4 @@
-.edit_delete_modal {
+.modal {
   position: absolute;
   background: #fff;
   padding: 15px;
@@ -7,6 +7,9 @@
   border-radius: 2px;
   color: #000;
   cursor: default;
+}
+
+.edit_delete_modal {
   right: -140px;
   top: -100%;
 }

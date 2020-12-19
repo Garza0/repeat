@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreator } from '../../store/actions';
+import './CreateDeckModal.css';
 
-function CreateDeck() {
+function CreateDeckModal() {
   const dispatch = useDispatch();
+
+  const createDeckModalVisible = useSelector(
+    (state) => state.modalWindowsReducer.createDeckVisibility
+  );
 
   const [deckInfo, setDeckInfo] = useState({
     description: '',
@@ -30,29 +35,33 @@ function CreateDeck() {
     dispatch(actionCreator.addDeck(deck));
   }
 
+  function onCancelCreateDeckModal(e) {
+    e.stopPropagation();
+    dispatch(actionCreator.changeCreateDeckModalVisible(false));
+  }
+
+  if (!createDeckModalVisible) return null;
   return (
-    <div>
+    <div className="create_deck_modal modal">
       <form onSubmit={onSubmit}>
         <div className="form-group">
-          <label>Deck Name</label>
           <input
             type="text"
             required
             className="form-control"
             value={deckInfo.description}
             onChange={onChangeDeckName}
+            placeholder="Deck Name"
           />
         </div>
         <div className="form-group">
-          <input
-            type="submit"
-            value="Create Deck"
-            className="btn btn-primary"
-          />
+          <input type="submit" value="Save" className="btn btn-primary" />
         </div>
       </form>
+      <button>Add cards</button>
+      <button onClick={onCancelCreateDeckModal}>Cancel</button>
     </div>
   );
 }
 
-export default CreateDeck;
+export default CreateDeckModal;

@@ -11,6 +11,7 @@ export const actionTypes = {
   ADD_CARD: 'ADD_CARD',
   UPDATE_CARD: 'UPDATE_CARD',
   DELETE_CARD: 'DELETE_CARD',
+  CHANGE_CREATE_DECK_VISIBLE: 'CHANGE_CREATE_DECK_VISIBLE',
 };
 
 export const actionCreator = {
@@ -22,4 +23,8 @@ export const actionCreator = {
   addCard: (data) => ({ type: actionTypes.ADD_CARD, data }), //data - card obj
   updateCard: (data) => ({ type: actionTypes.UPDATE_CARD, data }), //data - arr [0] - id, [1] - card obj
   deleteCard: (data) => ({ type: actionTypes.DELETE_CARD, data }), //data - card id
+  changeCreateDeckModalVisible: (data) => ({
+    type: actionTypes.CHANGE_CREATE_DECK_VISIBLE,
+    data,
+  }),
 };

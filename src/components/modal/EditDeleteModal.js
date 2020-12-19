@@ -15,7 +15,7 @@ function EditDeleteModal({ showById, id, show, deckId }) {
 
   if (show && id === showById) {
     return (
-      <div className="edit_delete_modal">
+      <div className="edit_delete_modal modal">
         <div className="edit_delete_modal-content">
           <div className="edit_delete_item">
             <EditOutlinedIcon className="edit_delete_icon" /> Edit

@@ -19,15 +19,6 @@ function Navbar() {
           </li>
           <li className="navbar-item">
             <NavLink
-              to="/add_deck"
-              className="nav-link"
-              activeClassName="navbar-item navbar-item--active"
-            >
-              Add Deck
-            </NavLink>
-          </li>
-          <li className="navbar-item">
-            <NavLink
               to="/cards"
               className="nav-link"
               activeClassName="navbar-item navbar-item--active"

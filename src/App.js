@@ -5,7 +5,6 @@ import Header from './components/header/Header';
 import Decks from './components/decks/Decks';
 import Cards from './components/cards/Cards';
 import CreateCard from './components/cards/CreateCard';
-import CreateDeck from './components/decks/CreateDeck';
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
         <Header />
         <br />
         <Route path="/" exact component={Decks} />
-        <Route path="/add_deck" component={CreateDeck} />
         <Route path="/cards" exact component={Cards} />
         <Route path="/add_card" component={CreateCard} />
       </div>

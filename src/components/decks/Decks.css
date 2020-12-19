@@ -12,13 +12,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* position: relative; */
 }
 
-.deck_list__item--active {
-  border: 1px solid #7fcdfa;
+.deck_list__item:hover {
+  box-shadow: 0 0 2px #7fcdfa;
 }
 
 .more_btn {
   position: relative;
+}
+
+.more_btn:hover {
+  color: #7fcdfa;
 }
