@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreator } from '../../store/actions';
+import CardsTable from './Table';
 
 export default function Cards() {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function Cards() {
       return (
         <div key={i} className="list-group-item list-group-item-action">
           {currentCard.front.value} | {currentCard.back.value} |
-          {currentCard.decks.join(' ')} | {currentCard.learnLevel}
+          {currentCard.decks.join(', ')} | {currentCard.learnLevel}
         </div>
       );
     });
@@ -34,7 +35,7 @@ export default function Cards() {
           </button>
         </Link>
       </div>
-      <div className="list-group">{cardsList()}</div>
+      <div className="list-group">{<CardsTable />}</div>
     </div>
   );
 }
