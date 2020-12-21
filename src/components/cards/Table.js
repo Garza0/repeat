@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreator } from '../../store/actions';
+import './Table.css';
 
 function Table() {
   const dispatch = useDispatch();
