@@ -1,8 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreator } from '../../store/actions';
 
 function Table() {
+  const dispatch = useDispatch();
   const cards = useSelector((state) => state.cardsReducer.cards);
+
+  const onEditCardClick = (e) => {};
+
+  const onDeleteCardClick = (e) => {
+    dispatch(actionCreator.deleteCard(e.target.id));
+  };
 
   const renderTableData = () => {
     return cards.map((card, i) => {
@@ -13,8 +21,12 @@ function Table() {
           <td>{card.decks.join(', ')}</td>
           <td>{card.learnLevel}</td>
           <td>
-            <button id={card._id}>Edit</button>
-            <button id={card._id}>Delete</button>
+            <button id={card._id} onClick={onEditCardClick}>
+              Edit
+            </button>
+            <button id={card._id} onClick={onDeleteCardClick}>
+              Delete
+            </button>
           </td>
         </tr>
       );
