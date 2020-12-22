@@ -26,15 +26,6 @@ function Navbar() {
               Cards
             </NavLink>
           </li>
-          <li className="navbar-item">
-            <NavLink
-              to="/add_card"
-              className="nav-link"
-              activeClassName="navbar-item navbar-item--active"
-            >
-              Add Card
-            </NavLink>
-          </li>
         </ul>
       </div>
     </nav>

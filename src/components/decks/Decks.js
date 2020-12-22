@@ -17,18 +17,19 @@ export default function Decks() {
   const [clickedElementId, setClickedElementId] = useState(null);
 
   const decks = useSelector((state) => state.decksReducer.decks);
+  const decksReversed = [...decks].reverse();
 
   const onModalClick = (e) => {
     setClickedElementId(Number(e.target.closest('div').id));
     setShowModal(!showModal);
   };
 
-  const onCreateDeckClick = (e) => {
+  const onCreateDeckClick = () => {
     dispatch(actionCreator.changeCreateDeckModalVisible(true));
   };
 
   const decksList = () => {
-    return decks.map((currentDeck, i) => {
+    return decksReversed.map((currentDeck, i) => {
       return (
         <div key={i} className="deck_list__item">
           {currentDeck.description}

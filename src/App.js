@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/header/Header';
 import Decks from './components/decks/Decks';
 import Cards from './components/cards/Cards';
-import CreateCard from './components/cards/CreateCard';
 
 function App() {
   return (
@@ -14,7 +13,6 @@ function App() {
         <br />
         <Route path="/" exact component={Decks} />
         <Route path="/cards" exact component={Cards} />
-        <Route path="/add_card" component={CreateCard} />
       </div>
     </Router>
   );

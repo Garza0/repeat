@@ -55,11 +55,13 @@ function CreateDeckModal() {
           />
         </div>
         <div className="form-group">
-          <input type="submit" value="Save" className="btn btn-primary" />
+          <input type="submit" value="Save" className="btn" />
         </div>
       </form>
-      <button>Add cards</button>
-      <button onClick={onCancelCreateDeckModal}>Cancel</button>
+      <button className="btn">Add cards</button>
+      <button className="btn" onClick={onCancelCreateDeckModal}>
+        Cancel
+      </button>
     </div>
   );
 }

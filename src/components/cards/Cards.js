@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 import Table from './Table';
+import CreateCardModal from './CreateCardModal';
 
 export default function Cards() {
   const dispatch = useDispatch();
@@ -10,30 +10,17 @@ export default function Cards() {
     dispatch(actionCreator.initCards());
   }, [dispatch]);
 
-  const cards = useSelector((state) => state.cardsReducer.cards);
-  console.log(cards);
-  const cardsList = () => {
-    return cards.map((currentCard, i) => {
-      return (
-        <div key={i} className="list-group-item list-group-item-action">
-          {currentCard.front.value} | {currentCard.back.value} |
-          {currentCard.decks.join(', ')} | {currentCard.learnLevel}
-        </div>
-      );
-    });
+  const onCreateCardClick = () => {
+    dispatch(actionCreator.changeCreateCardModalVisible(true));
   };
 
   return (
     <div>
       <div className="list-group">
-        <Link to="/add_card">
-          <button
-            type="button"
-            className="list-group-item list-group-item-action bg-primary text-light mb-3"
-          >
-            + Create New Card
-          </button>
-        </Link>
+        <button onClick={onCreateCardClick} type="button" className="btn">
+          + Create New Card
+        </button>
+        <CreateCardModal />
       </div>
       <div className="list-group">{<Table />}</div>
     </div>
