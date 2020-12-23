@@ -20,8 +20,13 @@ export default function Decks() {
   const decksReversed = [...decks].reverse();
 
   const onModalClick = (e) => {
-    setClickedElementId(Number(e.target.closest('div').id));
-    setShowModal(!showModal);
+    const newClickedElementId = Number(e.target.closest('div').id);
+    if (newClickedElementId === clickedElementId) {
+      setShowModal(!showModal);
+    } else {
+      setClickedElementId(newClickedElementId);
+      setShowModal(true);
+    }
   };
 
   const onCreateDeckClick = () => {
