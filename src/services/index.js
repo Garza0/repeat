@@ -42,4 +42,19 @@ const deleteCard = async (cardId) => {
   return rawResponse;
 };
 
-export { getDecks, getCards, postDeck, postCard, deleteDeck, deleteCard };
+const getDeckById = async (deckId) => {
+  const deck = await axios
+    .get('http://localhost:5000/decks/' + deckId)
+    .then((res) => res.data);
+  return deck;
+};
+
+export {
+  getDecks,
+  getCards,
+  postDeck,
+  postCard,
+  deleteDeck,
+  deleteCard,
+  getDeckById,
+};

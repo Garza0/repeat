@@ -3,7 +3,7 @@ import './Decks.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import EditDeleteModal from '../modal/EditDeleteModal';
+import EditDeleteModal from './EditDeleteModal';
 import CreateDeckModal from './CreateDeckModal';
 
 export default function Decks() {
@@ -30,6 +30,7 @@ export default function Decks() {
   };
 
   const onCreateDeckClick = () => {
+    setShowModal(false);
     dispatch(actionCreator.changeCreateDeckModalVisible(true));
   };
 
@@ -56,8 +57,12 @@ export default function Decks() {
     <>
       <div>
         <div className="list-group">
-          <div className="deck_list__item" onClick={onCreateDeckClick}>
-            + Create New Deck <CreateDeckModal />
+          <div
+            className="deck_list__item create_new_deck"
+            onClick={onCreateDeckClick}
+          >
+            <p>+ Create New Deck</p>
+            <CreateDeckModal />
           </div>
         </div>
       </div>
