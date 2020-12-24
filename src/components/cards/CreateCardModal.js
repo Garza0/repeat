@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreator } from '../../store/actions';
+import './CreateCardModal.css';
 
 function CreateCardModal() {
   const dispatch = useDispatch();
@@ -37,6 +38,10 @@ function CreateCardModal() {
     dispatch(actionCreator.addCard(card));
   };
 
+  useEffect(() => {
+    dispatch(actionCreator.initDecks());
+  }, [dispatch]);
+
   function onChangeFront(e) {
     setCardInfo({
       ...cardInfo,
@@ -55,21 +60,34 @@ function CreateCardModal() {
     e.stopPropagation();
     dispatch(actionCreator.changeCreateCardModalVisible(false));
   };
+  const decks = useSelector((state) => state.decksReducer.decks);
+
+  const deckSelect = () => {
+    console.log(decks);
+    const options = decks.map((deck) => {
+      return (
+        <option key={deck._id} value={deck.description}>
+          {deck.description}
+        </option>
+      );
+    });
+    return <select>{options}</select>;
+  };
 
   if (!createCardModalVisibility) return null;
   return (
     <div className="create_card_modal modal modal--center">
       <form onSubmit={onSubmit}>
-        <input
-          className="input"
+        <textarea
+          className="input create_card-textarea"
           onChange={onChangeFront}
           value={cardInfo.front.value}
           type="text"
           required
           placeholder="Front Side"
         />
-        <input
-          className="input"
+        <textarea
+          className="input create_card-textarea"
           onChange={onChangeBack}
           value={cardInfo.back.value}
           type="text"
@@ -77,11 +95,12 @@ function CreateCardModal() {
           placeholder="Back Side"
         />
         <input type="submit" value="Save" className="btn" />
+        {deckSelect()}
+        <button className="btn">Add this card to decks</button>
+        <button className="btn" onClick={onCancelCreateCardModal}>
+          Cancel
+        </button>
       </form>
-      <button className="btn">Add this card to decks</button>
-      <button className="btn" onClick={onCancelCreateCardModal}>
-        Cancel
-      </button>
     </div>
   );
 }

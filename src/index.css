@@ -27,6 +27,7 @@ code {
   border-radius: 8px;
   color: #000;
   cursor: default;
+  z-index: 2;
 }
 
 .modal--center {

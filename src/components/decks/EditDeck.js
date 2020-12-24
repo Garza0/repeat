@@ -1,19 +1,43 @@
+import { Input } from '@material-ui/core';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDeckById } from '../../services/index';
 
 export default function EditDeck() {
   let { id } = useParams();
-
   const [deckData, setDeckData] = useState(null);
+
+  const [renameDeck, setRenameDeck] = useState(false);
+
   const getDeck = useCallback(async () => {
-    const deckData = await getDeckById(id);
-    setDeckData(deckData);
+    const data = await getDeckById(id);
+    setDeckData(data);
   }, [id]);
 
-  useEffect(() => getDeck(), [getDeck]);
+  useEffect(() => {
+    getDeck();
+  }, [getDeck]);
 
-  console.log(deckData);
+  const onRenameDeckClick = () => {
+    setRenameDeck(!renameDeck);
+  };
 
-  return <div>edit deck page {deckData.description}</div>;
+  return (
+    <div>
+      <div className="deck_header">
+        {renameDeck ? (
+          <input
+            placeholder={deckData.description}
+            defaultValue={deckData.description}
+          />
+        ) : (
+          deckData?.description
+        )}
+        <button onClick={onRenameDeckClick}>
+          {renameDeck ? 'Save' : 'Rename Deck'}
+        </button>
+      </div>
+      <div className="deck_cards">cards</div>
+    </div>
+  );
 }
