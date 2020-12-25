@@ -6,6 +6,20 @@ import './Table.css';
 function Table() {
   const dispatch = useDispatch();
   const cards = useSelector((state) => state.cardsReducer.cards);
+  const decks = useSelector((state) => state.decksReducer.decks);
+
+  const getDeckDescription = (arrOfDecksIds) => {
+    const decksOfCard = decks.filter((deck) => {
+      const boolArr = arrOfDecksIds.map((deckId) => {
+        return deckId === deck._id;
+      });
+      return boolArr.includes(true);
+    });
+    const decksDescriptions = decksOfCard.map((deck) => {
+      return deck.description;
+    });
+    return decksDescriptions;
+  };
 
   const onEditCardClick = (e) => {};
 
@@ -15,11 +29,12 @@ function Table() {
 
   const renderTableData = () => {
     return cards.map((card, i) => {
+      const decksNameArr = getDeckDescription(card.decks);
       return (
         <tr key={i} id={card._id}>
           <td>{card.front.value}</td>
           <td>{card.back.value}</td>
-          <td>{card.decks.join(', ')}</td>
+          <td>{decksNameArr?.join(', ')}</td>
           <td>{card.learnLevel}</td>
           <td>
             <button id={card._id} onClick={onEditCardClick}>
