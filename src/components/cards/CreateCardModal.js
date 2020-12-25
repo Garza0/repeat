@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 import './CreateCardModal.css';
+import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
 
 function CreateCardModal() {
   const dispatch = useDispatch();
@@ -63,20 +64,37 @@ function CreateCardModal() {
   const decks = useSelector((state) => state.decksReducer.decks);
 
   const deckSelect = () => {
-    console.log(decks);
+    const onDeckSelectChange = (e) => {
+      const selectionArr = [...e.target.selectedOptions];
+      const selectionIds = selectionArr.map((option) => {
+        return option.id;
+      });
+      console.log(selectionIds);
+      setCardInfo({ ...cardInfo, decks: [...selectionIds] });
+    };
+
     const options = decks.map((deck) => {
       return (
-        <option key={deck._id} value={deck.description}>
+        <option id={deck._id} key={deck._id} value={deck.description}>
           {deck.description}
         </option>
       );
     });
-    return <select>{options}</select>;
+    return (
+      <select
+        className="select--multiple"
+        multiple
+        onChange={onDeckSelectChange}
+      >
+        {options}
+      </select>
+    );
   };
 
   if (!createCardModalVisibility) return null;
   return (
     <div className="create_card_modal modal modal--center">
+      <CancelPresentationIcon onClick={onCancelCreateCardModal} />
       <form onSubmit={onSubmit}>
         <textarea
           className="input create_card-textarea"
@@ -94,12 +112,9 @@ function CreateCardModal() {
           required
           placeholder="Back Side"
         />
-        <input type="submit" value="Save" className="btn" />
         {deckSelect()}
-        <button className="btn">Add this card to decks</button>
-        <button className="btn" onClick={onCancelCreateCardModal}>
-          Cancel
-        </button>
+
+        <input type="submit" value="Save" className="btn" />
       </form>
     </div>
   );
