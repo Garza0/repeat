@@ -13,6 +13,7 @@ export const actionTypes = {
   DELETE_CARD: 'DELETE_CARD',
   CHANGE_CREATE_DECK_VISIBLE: 'CHANGE_CREATE_DECK_VISIBLE',
   CHANGE_CREATE_CARD_VISIBLE: 'CHANGE_CREATE_CARD_VISIBLE',
+  CHANGE_SELECTED_DECKS: 'CHANGE_SELECTED_DECKS',
 };
 
 export const actionCreator = {
@@ -32,4 +33,8 @@ export const actionCreator = {
     type: actionTypes.CHANGE_CREATE_CARD_VISIBLE,
     data,
   }),
+  changeSelectedDecks: (data) => ({
+    type: actionTypes.CHANGE_SELECTED_DECKS,
+    data,
+  }), //data - array of selected decks id's
 };

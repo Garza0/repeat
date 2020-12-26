@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 import './CreateCardModal.css';
 import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
+import DecksSelector from './DecksSelector';
 
 function CreateCardModal() {
   const dispatch = useDispatch();
@@ -10,6 +11,12 @@ function CreateCardModal() {
   const createCardModalVisibility = useSelector(
     (state) => state.modalWindowsReducer.createCardVisibility
   );
+
+  console.log(createCardModalVisibility);
+
+  useEffect(() => {
+    dispatch(actionCreator.initDecks());
+  }, [dispatch]);
 
   const initialCardState = {
     decks: [],
@@ -23,81 +30,58 @@ function CreateCardModal() {
 
   const [cardInfo, setCardInfo] = useState(initialCardState);
 
+  const selectedDecksIds = useSelector(
+    (state) => state.modalWindowsReducer.selectedDecks
+  );
+  useEffect(() => {
+    console.log(selectedDecksIds);
+  });
+
   const onSubmit = (e) => {
     e.preventDefault();
 
+    const { showDates, date, front, back, nextShow, learnLevel } = cardInfo;
+
     const card = {
-      decks: cardInfo.decks,
-      showDates: cardInfo.showDates,
-      date: cardInfo.date,
-      front: cardInfo.front,
-      back: cardInfo.back,
-      nextShow: cardInfo.nextShow,
-      learnLevel: cardInfo.learnLevel,
+      decks: selectedDecksIds,
+      showDates,
+      date,
+      front,
+      back,
+      nextShow,
+      learnLevel,
     };
-    setCardInfo(initialCardState);
+
     dispatch(actionCreator.addCard(card));
+    setCardInfo(initialCardState);
   };
 
-  useEffect(() => {
-    dispatch(actionCreator.initDecks());
-  }, [dispatch]);
-
-  function onChangeFront(e) {
+  const onChangeFront = (e) => {
     setCardInfo({
       ...cardInfo,
       front: { ...cardInfo.front, value: e.target.value },
     });
-  }
+  };
 
-  function onChangeBack(e) {
+  const onChangeBack = (e) => {
     setCardInfo({
       ...cardInfo,
       back: { ...cardInfo.back, value: e.target.value },
     });
-  }
+  };
 
   const onCancelCreateCardModal = (e) => {
     e.stopPropagation();
     dispatch(actionCreator.changeCreateCardModalVisible(false));
   };
-  const decks = useSelector((state) => state.decksReducer.decks);
-
-  const deckSelect = () => {
-    const onDeckSelectChange = (e) => {
-      const selectionArr = [...e.target.selectedOptions];
-      const selectionIds = selectionArr.map((option) => {
-        return option.id;
-      });
-      console.log(selectionIds);
-      setCardInfo({ ...cardInfo, decks: [...selectionIds] });
-    };
-
-    const options = decks.map((deck) => {
-      return (
-        <option id={deck._id} key={deck._id} value={deck.description}>
-          {deck.description}
-        </option>
-      );
-    });
-    return (
-      <select
-        className="select--multiple"
-        multiple
-        onChange={onDeckSelectChange}
-      >
-        {options}
-      </select>
-    );
-  };
 
   if (!createCardModalVisibility) return null;
   return (
-    <div className="create_card_modal modal modal--center">
+    <div className="modal modal--center">
       <CancelPresentationIcon onClick={onCancelCreateCardModal} />
       <form onSubmit={onSubmit}>
         <textarea
-          className="input create_card-textarea"
+          className="input textarea_create-card"
           onChange={onChangeFront}
           value={cardInfo.front.value}
           type="text"
@@ -105,14 +89,14 @@ function CreateCardModal() {
           placeholder="Front Side"
         />
         <textarea
-          className="input create_card-textarea"
+          className="input textarea_create-card"
           onChange={onChangeBack}
           value={cardInfo.back.value}
           type="text"
           required
           placeholder="Back Side"
         />
-        {deckSelect()}
+        <DecksSelector />
 
         <input type="submit" value="Save" className="btn" />
       </form>

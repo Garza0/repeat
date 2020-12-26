@@ -3,9 +3,11 @@ import { useDispatch } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 import Table from './Table';
 import CreateCardModal from './CreateCardModal';
+import { BUTTONS_TEXT } from '../../constants';
 
 export default function Cards() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(actionCreator.initCards());
   }, [dispatch]);
@@ -16,13 +18,13 @@ export default function Cards() {
 
   return (
     <div>
-      <div className="list-group">
+      <div>
         <button onClick={onCreateCardClick} type="button" className="btn">
-          + Create New Card
+          {BUTTONS_TEXT.CREATE_NEW_CARD}
         </button>
         <CreateCardModal />
       </div>
-      <div className="list-group">{<Table />}</div>
+      <div>{<Table />}</div>
     </div>
   );
 }

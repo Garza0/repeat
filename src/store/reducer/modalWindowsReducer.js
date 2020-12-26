@@ -3,6 +3,7 @@ import { actionTypes } from '../actions';
 const initialState = {
   createDeckVisibility: false,
   createCardVisibility: false,
+  selectedDecks: [],
 };
 
 export default function modalWindowsReducer(state = initialState, action) {
@@ -17,6 +18,12 @@ export default function modalWindowsReducer(state = initialState, action) {
       return {
         ...state,
         createCardVisibility: action.data,
+      };
+    }
+    case actionTypes.CHANGE_SELECTED_DECKS: {
+      return {
+        ...state,
+        selectedDecks: action.data,
       };
     }
 
