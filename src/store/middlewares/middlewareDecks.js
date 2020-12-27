@@ -1,5 +1,5 @@
 import { actionTypes } from '../actions';
-import { getDecks, postDeck, deleteDeck, getDeckById } from '../../services';
+import { getDecks, postDeck, deleteDeck } from '../../services';
 
 const middlewareDecks = (store) => (next) => async (action) => {
   switch (action.type) {

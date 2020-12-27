@@ -12,8 +12,6 @@ function CreateCardModal() {
     (state) => state.modalWindowsReducer.createCardVisibility
   );
 
-  console.log(createCardModalVisibility);
-
   useEffect(() => {
     dispatch(actionCreator.initDecks());
   }, [dispatch]);
@@ -33,9 +31,6 @@ function CreateCardModal() {
   const selectedDecksIds = useSelector(
     (state) => state.modalWindowsReducer.selectedDecks
   );
-  useEffect(() => {
-    console.log(selectedDecksIds);
-  });
 
   const onSubmit = (e) => {
     e.preventDefault();

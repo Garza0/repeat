@@ -16,14 +16,14 @@ function CreateDeckModal() {
     cards: [],
   });
 
-  function onChangeDeckName(e) {
+  const onChangeDeckName = (e) => {
     setDeckInfo({
       ...deckInfo,
       description: e.target.value,
     });
-  }
+  };
 
-  function onSubmit(e) {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     const deck = {
@@ -33,28 +33,27 @@ function CreateDeckModal() {
     };
 
     dispatch(actionCreator.addDeck(deck));
-  }
+  };
 
-  function onCancelCreateDeckModal(e) {
+  const onCancelCreateDeckModal = (e) => {
     e.stopPropagation();
     dispatch(actionCreator.changeCreateDeckModalVisible(false));
-  }
+  };
 
   if (!createDeckModalVisible) return null;
   return (
     <div className="create_deck_modal modal">
       <form onSubmit={onSubmit}>
-        <div className="form-group">
+        <div>
           <input
             type="text"
             required
-            className="form-control"
             value={deckInfo.description}
             onChange={onChangeDeckName}
             placeholder="Deck Name"
           />
         </div>
-        <div className="form-group">
+        <div>
           <input type="submit" value="Save" className="btn" />
         </div>
       </form>

@@ -1,8 +1,7 @@
-import { Input } from '@material-ui/core';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDeckById } from '../../services/index';
-
+//TODO: rewrite all component logic
 export default function EditDeck() {
   let { id } = useParams();
   const [deckData, setDeckData] = useState(null);

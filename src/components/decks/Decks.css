@@ -1,4 +1,4 @@
-.deck_list__item {
+.deck-list__item {
   width: 260px;
   height: 56px;
   background-color: #47494e;
@@ -14,7 +14,7 @@
   align-items: center;
 }
 
-.deck_list__item:hover {
+.deck-list__item:hover {
   box-shadow: 0 0 2px #7fcdfa;
 }
 

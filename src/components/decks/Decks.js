@@ -5,6 +5,7 @@ import { actionCreator } from '../../store/actions';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import EditDeleteModal from './EditDeleteModal';
 import CreateDeckModal from './CreateDeckModal';
+import { BUTTONS_TEXT } from '../../constants';
 
 export default function Decks() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export default function Decks() {
   const decks = useSelector((state) => state.decksReducer.decks);
   const decksReversed = [...decks].reverse();
 
+  //TODO: modal open close logic
   const onModalClick = (e) => {
     const newClickedElementId = Number(e.target.closest('div').id);
     if (newClickedElementId === clickedElementId) {
@@ -28,7 +30,7 @@ export default function Decks() {
       setShowModal(true);
     }
   };
-
+  //TODO: only one open modal on page
   const onCreateDeckClick = () => {
     setShowModal(false);
     dispatch(actionCreator.changeCreateDeckModalVisible(true));
@@ -37,7 +39,7 @@ export default function Decks() {
   const decksList = () => {
     return decksReversed.map((currentDeck, i) => {
       return (
-        <div key={i} className="deck_list__item">
+        <div key={i} className="deck-list__item">
           {currentDeck.description}
           <div id={i} onClick={onModalClick} className="more_btn">
             <MoreVertIcon />
@@ -56,17 +58,17 @@ export default function Decks() {
   return (
     <>
       <div>
-        <div className="list-group">
+        <div>
           <div
-            className="deck_list__item create_new_deck"
+            className="deck-list__item create_new_deck"
             onClick={onCreateDeckClick}
           >
-            <p>+ Create New Deck</p>
+            <p>{BUTTONS_TEXT.CREATE_NEW_DECK}</p>
             <CreateDeckModal />
           </div>
         </div>
       </div>
-      <div className="list-group">{decksList()}</div>
+      <div>{decksList()}</div>
     </>
   );
 }

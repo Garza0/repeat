@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './EditDeleteModal.css';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
@@ -9,13 +9,12 @@ import { Link } from 'react-router-dom';
 function EditDeleteModal({ showById, id, show, deckId }) {
   const dispatch = useDispatch();
 
-  function onDeckDelete() {
-    console.log(deckId);
+  const onDeckDelete = () => {
     dispatch(actionCreator.deleteDeck(deckId));
-  }
+  };
 
   const onDeckEdit = () => {};
-
+  //TODO: open close modal logic
   if (show && id === showById) {
     return (
       <div className="edit_delete_modal modal">

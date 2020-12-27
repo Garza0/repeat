@@ -4,14 +4,13 @@ import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
-      <div className="collapse navbar-collapse">
-        <ul className="navbar-nav mr-auto">
+    <nav>
+      <div>
+        <ul className="navbar-nav">
           <li className="navbar-item">
             <NavLink
               to="/"
               exact
-              className="nav-link"
               activeClassName="navbar-item navbar-item--active"
             >
               Decks
@@ -20,7 +19,6 @@ function Navbar() {
           <li className="navbar-item">
             <NavLink
               to="/cards"
-              className="nav-link"
               activeClassName="navbar-item navbar-item--active"
             >
               Cards
