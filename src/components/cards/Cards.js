@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { actionCreator } from '../../store/actions';
-import Table from './Table';
+import CardsTable from './CardsTable';
 import CreateCardModal from './CreateCardModal';
 import { BUTTONS_TEXT } from '../../constants';
 
@@ -24,7 +24,7 @@ export default function Cards() {
         </button>
         <CreateCardModal />
       </div>
-      <div>{<Table />}</div>
+      <div>{<CardsTable />}</div>
     </div>
   );
 }
