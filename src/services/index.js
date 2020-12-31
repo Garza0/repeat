@@ -9,6 +9,7 @@ const {
   DELETE_DECK_BY_ID,
   DELETE_CARD_BY_ID,
   GET_DECK_BY_ID,
+  UPDATE_CARD_BY_ID,
 } = URLS;
 
 const getDecks = async () => {

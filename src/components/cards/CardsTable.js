@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 import EditCardModal from './EditCardModal';
@@ -8,6 +8,8 @@ function CardsTable() {
   const dispatch = useDispatch();
   const cards = useSelector((state) => state.cardsReducer.cards);
   const decks = useSelector((state) => state.decksReducer.decks);
+
+  const [selectedCardId, setSelectedCardId] = useState('');
 
   const renderTableHeader = () => {
     const columns = ['Front', 'Back', 'Decks', 'Learn level', 'Action'];
@@ -34,7 +36,6 @@ function CardsTable() {
           <td>{decksNameArr.join(', ')}</td>
           <td>{card.learnLevel}</td>
           <td>
-            <EditCardModal cardId={card._id} />
             <button id={card._id} onClick={onEditCardClick}>
               Edit
             </button>
@@ -48,7 +49,8 @@ function CardsTable() {
   };
 
   const onEditCardClick = (e) => {
-    console.log(e);
+    setSelectedCardId(e.target.id);
+    dispatch(actionCreator.changeEditCardVisible(true));
   };
 
   const onDeleteCardClick = (e) => {
@@ -63,6 +65,7 @@ function CardsTable() {
           {renderTableBody()}
         </tbody>
       </table>
+      <EditCardModal cardId={selectedCardId} />
     </div>
   );
 }
