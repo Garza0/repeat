@@ -51,6 +51,13 @@ const getDeckById = async (deckId) => {
   return deck;
 };
 
+const updateCardById = async (cardId, cardForUpdate) => {
+  const rawResponse = await axios
+    .put(UPDATE_CARD_BY_ID + cardId, cardForUpdate)
+    .then((res) => res.data);
+  return rawResponse;
+};
+
 export {
   getDecks,
   getCards,
@@ -59,4 +66,5 @@ export {
   deleteDeck,
   deleteCard,
   getDeckById,
+  updateCardById,
 };

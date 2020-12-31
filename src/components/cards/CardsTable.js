@@ -65,7 +65,7 @@ function CardsTable() {
           {renderTableBody()}
         </tbody>
       </table>
-      <EditCardModal cardId={selectedCardId} />
+      {selectedCardId && <EditCardModal cardId={selectedCardId} />}
     </div>
   );
 }

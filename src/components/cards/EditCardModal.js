@@ -6,17 +6,22 @@ import { actionCreator } from '../../store/actions';
 
 function EditCardModal({ cardId }) {
   const dispatch = useDispatch();
-
   const modalVisibility = useSelector(
     (state) => state.modalWindowsReducer.editCardVisibility
   );
   const cards = useSelector((state) => state.cardsReducer.cards);
 
+  const selectedDecks = useSelector(
+    (state) => state.modalWindowsReducer.selectedDecks
+  );
+
   const selectedCardData = () => {
     return cards.filter((card) => card._id === cardId)[0];
   };
 
-  const { front, back } = selectedCardData();
+  const { front, back, decks, learnLevel } = selectedCardData();
+
+  const [cardData, setCardData] = useState(selectedCardData());
 
   const [frontValue, setFrontValue] = useState(front.value);
   const [backValue, setBackValue] = useState(back.value);
@@ -25,10 +30,19 @@ function EditCardModal({ cardId }) {
     dispatch(actionCreator.changeEditCardVisible(false));
   };
 
-  const onSubmit = () => {};
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(actionCreator.updateCard([cardId, cardData]));
+  };
 
   const onFrontChange = (e) => {
-    setFrontValue(e.target.value);
+    setCardData((prevState) => ({
+      ...prevState,
+      front: {
+        ...prevState.front,
+        value: e.target.value,
+      },
+    }));
   };
 
   const onBackChange = (e) => {
@@ -42,18 +56,17 @@ function EditCardModal({ cardId }) {
       <form onSubmit={onSubmit}>
         <textarea
           className="input textarea_create-card"
-          value={frontValue}
+          value={cardData.front.value}
           onChange={onFrontChange}
         />
         <textarea
           className="input textarea_create-card"
-          value={backValue}
+          value={cardData.back.value}
           onChange={onBackChange}
         />
+        <input type="submit" value="Save" className="btn" />
       </form>
       <DecksSelector decksOfCard={selectedCardData().decks} />
-
-      <input type="submit" value="Save" className="btn" />
     </div>
   );
 }
