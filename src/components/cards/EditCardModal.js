@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DecksSelector from './DecksSelector';
 import { useSelector, useDispatch } from 'react-redux';
 import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
@@ -19,12 +19,11 @@ function EditCardModal({ cardId }) {
     return cards.filter((card) => card._id === cardId)[0];
   };
 
-  const { front, back, decks, learnLevel } = selectedCardData();
-
   const [cardData, setCardData] = useState(selectedCardData());
 
-  const [frontValue, setFrontValue] = useState(front.value);
-  const [backValue, setBackValue] = useState(back.value);
+  useEffect(() => {
+    setCardData((prevState) => ({ ...prevState, decks: [...selectedDecks] }));
+  }, [selectedDecks]);
 
   const onCancelEditCardModal = () => {
     dispatch(actionCreator.changeEditCardVisible(false));
@@ -46,7 +45,17 @@ function EditCardModal({ cardId }) {
   };
 
   const onBackChange = (e) => {
-    setBackValue(e.target.value);
+    setCardData((prevState) => ({
+      ...prevState,
+      back: {
+        ...prevState.back,
+        value: e.target.value,
+      },
+    }));
+  };
+
+  const resetCardProgress = () => {
+    setCardData({ ...cardData, learnLevel: 0 });
   };
 
   if (!modalVisibility) return null;
@@ -67,6 +76,8 @@ function EditCardModal({ cardId }) {
         <input type="submit" value="Save" className="btn" />
       </form>
       <DecksSelector decksOfCard={selectedCardData().decks} />
+      <div className="card-learn-level">{cardData.learnLevel}</div>
+      <button onClick={resetCardProgress}>Reset Progress</button>
     </div>
   );
 }

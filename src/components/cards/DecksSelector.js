@@ -11,13 +11,16 @@ function DecksSelector({ decksOfCard }) {
     dispatch(actionCreator.initDecks());
   }, [dispatch]);
 
+  useEffect(() => {
+    dispatch(actionCreator.changeSelectedDecks([...selectedDecks]));
+  }, [dispatch, selectedDecks]);
+
   const decks = useSelector((state) => state.decksReducer.decks);
 
   const onSelectDecksChange = (e) => {
     const selectedDecksArr = [...e.target.selectedOptions];
     const selectedDecksIds = selectedDecksArr.map((option) => option.id);
     setSelectedDeck(selectedDecksIds);
-    dispatch(actionCreator.changeSelectedDecks([...selectedDecksIds]));
   };
 
   const options = decks.map((deck) => {
