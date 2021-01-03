@@ -36,7 +36,7 @@ router.route('/:id').delete((req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
-router.route('/update/:id').post((req, res) => {
+router.route('/update/:id').put((req, res) => {
   Deck.findById(req.params.id)
     .then((deck) => {
       deck.description = req.body.description;

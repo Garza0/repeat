@@ -10,6 +10,7 @@ const {
   DELETE_CARD_BY_ID,
   GET_DECK_BY_ID,
   UPDATE_CARD_BY_ID,
+  UPDATE_DECK_BY_ID,
 } = URLS;
 
 const getDecks = async () => {
@@ -58,6 +59,13 @@ const updateCardById = async (cardId, cardForUpdate) => {
   return rawResponse;
 };
 
+const updateDeckById = async (deckId, deckForUpdate) => {
+  const rawResponse = await axios
+    .put(UPDATE_DECK_BY_ID + deckId, deckForUpdate)
+    .then((res) => res.data);
+  return rawResponse;
+};
+
 export {
   getDecks,
   getCards,
@@ -67,4 +75,5 @@ export {
   deleteCard,
   getDeckById,
   updateCardById,
+  updateDeckById,
 };
