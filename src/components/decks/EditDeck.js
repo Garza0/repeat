@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getDeckById } from '../../services/index';
+import { getDeckById, getCardsByIdsArr } from '../../services/index';
 import { useDispatch } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 
@@ -11,6 +11,7 @@ export default function EditDeck() {
   const [renameDeck, setRenameDeck] = useState(false);
   const [nameInputValue, setNameInputValue] = useState('');
   const [isFetching, setIsFetching] = useState(true);
+  const [cardsData, setCardsData] = useState([]);
 
   useEffect(() => {
     setIsFetching(true);
@@ -18,10 +19,26 @@ export default function EditDeck() {
       const data = await getDeckById(id);
       setDeckData(data);
       setNameInputValue(data.description);
+
       setIsFetching(false);
     };
     getDeck();
   }, [id]);
+
+  useEffect(() => {
+    console.log(deckData);
+    if (deckData) {
+      const getCards = async () => {
+        const cards = await getCardsByIdsArr(deckData.cards);
+        setCardsData(cards);
+        console.log(cards);
+      };
+
+      getCards();
+    }
+  }, [deckData]);
+
+  console.log(cardsData);
 
   const onRenameDeckClick = () => {
     setRenameDeck(true);

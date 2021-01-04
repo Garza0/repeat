@@ -11,6 +11,7 @@ const {
   GET_DECK_BY_ID,
   UPDATE_CARD_BY_ID,
   UPDATE_DECK_BY_ID,
+  GET_CARDS_BY_IDS_ARR,
 } = URLS;
 
 const getDecks = async () => {
@@ -20,6 +21,15 @@ const getDecks = async () => {
 
 const getCards = async () => {
   const cards = await axios.get(GET_CARDS).then((res) => res.data);
+  return cards;
+};
+
+const getCardsByIdsArr = async (idsArr) => {
+  const cards = await axios
+    .get(GET_CARDS_BY_IDS_ARR, {
+      params: { ids: idsArr },
+    })
+    .then((res) => res.data);
   return cards;
 };
 
@@ -76,4 +86,5 @@ export {
   getDeckById,
   updateCardById,
   updateDeckById,
+  getCardsByIdsArr,
 };

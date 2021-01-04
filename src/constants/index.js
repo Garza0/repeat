@@ -15,6 +15,7 @@ const URLS = {
   GET_DECK_BY_ID: `${MAIN_URL}decks/`,
   UPDATE_CARD_BY_ID: `${MAIN_URL}cards/update/`,
   UPDATE_DECK_BY_ID: `${MAIN_URL}decks/update/`,
+  GET_CARDS_BY_IDS_ARR: `${MAIN_URL}cards/ids`,
 };
 
 export { BUTTONS_TEXT, URLS };
