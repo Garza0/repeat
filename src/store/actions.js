@@ -15,6 +15,8 @@ export const actionTypes = {
   CHANGE_CREATE_CARD_VISIBLE: 'CHANGE_CREATE_CARD_VISIBLE',
   CHANGE_SELECTED_DECKS: 'CHANGE_SELECTED_DECKS',
   CHANGE_EDIT_CARD_VISIBLE: 'CHANGE_EDIT_CARD_VISIBLE',
+  USER_LOGIN: 'USER_LOGIN',
+  USER_LOGOUT: 'USER_LOGOUT',
 };
 
 export const actionCreator = {
@@ -42,4 +44,9 @@ export const actionCreator = {
     type: actionTypes.CHANGE_EDIT_CARD_VISIBLE,
     data,
   }),
+  userLogin: (data) => ({
+    type: actionTypes.USER_LOGIN,
+    data,
+  }),
+  userLogout: () => ({ type: actionTypes.USER_LOGOUT }),
 };

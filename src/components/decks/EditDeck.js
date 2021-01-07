@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getDeckById, getCardsByIdsArr } from '../../services/index';
 import { useDispatch } from 'react-redux';
 import { actionCreator } from '../../store/actions';
+import CardsTable from './CardsTable';
 
 export default function EditDeck() {
   const dispatch = useDispatch();
@@ -26,19 +27,14 @@ export default function EditDeck() {
   }, [id]);
 
   useEffect(() => {
-    console.log(deckData);
     if (deckData) {
       const getCards = async () => {
         const cards = await getCardsByIdsArr(deckData.cards);
         setCardsData(cards);
-        console.log(cards);
       };
-
       getCards();
     }
   }, [deckData]);
-
-  console.log(cardsData);
 
   const onRenameDeckClick = () => {
     setRenameDeck(true);
@@ -76,7 +72,9 @@ export default function EditDeck() {
           <button onClick={onSaveDeckNameClick}>Save</button>
         )}
       </div>
-      <div className="deck_cards">cards</div>
+      <div className="deck_cards">
+        {cardsData && <CardsTable deckId={id} cards={cardsData} />}
+      </div>
     </div>
   );
 }

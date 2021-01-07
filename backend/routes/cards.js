@@ -8,7 +8,7 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/ids').get((req, res) => {
-  console.log(req.params, req.query);
+  console.log(req.query);
   Card.find({
     _id: { $in: [...req.query.ids] },
   })

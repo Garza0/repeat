@@ -25,12 +25,14 @@ const getCards = async () => {
 };
 
 const getCardsByIdsArr = async (idsArr) => {
-  const cards = await axios
-    .get(GET_CARDS_BY_IDS_ARR, {
-      params: { ids: idsArr },
-    })
-    .then((res) => res.data);
-  return cards;
+  if (idsArr.length > 0) {
+    const cards = await axios
+      .get(GET_CARDS_BY_IDS_ARR, {
+        params: { ids: idsArr },
+      })
+      .then((res) => res.data);
+    return cards;
+  }
 };
 
 const postDeck = async (deck) => {
