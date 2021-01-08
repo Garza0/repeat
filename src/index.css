@@ -16,6 +16,7 @@ code {
 .container {
   max-width: 70%;
   margin: auto;
+  position: relative;
 }
 
 .modal {

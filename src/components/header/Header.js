@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Navbar from './Navbar';
 import './Header.css';
+import User from './User';
 
 function Header() {
   return (
@@ -10,6 +11,7 @@ function Header() {
         repeat
       </NavLink>
       <Navbar />
+      <User />
     </div>
   );
 }

@@ -1,14 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Header from './components/header/Header';
 import Decks from './components/decks/Decks';
 import Cards from './components/cards/Cards';
 import EditDeck from './components/decks/EditDeck';
 import Signup from './components/login/Signup';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { auth } from './components/login/firebase';
+import { actionCreator } from './store/actions';
 
 function App() {
-  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer.user);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        console.log(authUser);
+        const userData = {
+          id: authUser.uid,
+          name: authUser.displayName,
+          avatar: authUser.photoURL,
+        };
+        dispatch(actionCreator.userLogin(userData));
+      } else {
+        dispatch(actionCreator.userLogout());
+      }
+    });
+  }, [dispatch]);
+
   return (
     <>
       <Router>
