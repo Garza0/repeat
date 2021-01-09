@@ -17,7 +17,6 @@ const middlewareDecks = (store) => (next) => async (action) => {
       break;
     case actionTypes.ADD_DECK:
       try {
-        console.log(action.data);
         await postDeck(action.data);
         const data = await getDecks();
         store.dispatch({
