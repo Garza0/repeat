@@ -21,9 +21,11 @@ connection.once('open', () => {
   console.log('MongoDB connection established successfully');
 });
 
+const userRouter = require('./routes/user');
 const decksRouter = require('./routes/decks');
 const cardsRouter = require('./routes/cards');
 
+app.use('/user', userRouter);
 app.use('/decks', decksRouter);
 app.use('/cards', cardsRouter);
 
