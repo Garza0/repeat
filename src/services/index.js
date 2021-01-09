@@ -12,7 +12,35 @@ const {
   UPDATE_CARD_BY_ID,
   UPDATE_DECK_BY_ID,
   GET_CARDS_BY_IDS_ARR,
+  GET_USER_BY_ID,
+  POST_USER,
+  DELETE_USER_BY_ID,
+  UPDATE_USER_BY_ID,
 } = URLS;
+
+const getUser = async (userId) => {
+  const user = await axios.get(GET_USER_BY_ID + userId).then((res) => res.data);
+  return user;
+};
+
+const postUser = async (user) => {
+  const rawResponse = await axios.post(POST_USER, user).then((res) => res.data);
+  return rawResponse;
+};
+
+const deleteUser = async (userId) => {
+  const rawResponse = await axios
+    .delete(DELETE_USER_BY_ID + userId)
+    .then((res) => res.data);
+  return rawResponse;
+};
+
+const updateUser = async (userId, userForUpdate) => {
+  const rawResponse = await axios
+    .put(UPDATE_USER_BY_ID + userId, userForUpdate)
+    .then((res) => res.data);
+  return rawResponse;
+};
 
 const getDecks = async () => {
   const decks = await axios.get(GET_DECKS).then((res) => res.data);
@@ -89,4 +117,8 @@ export {
   updateCardById,
   updateDeckById,
   getCardsByIdsArr,
+  getUser,
+  postUser,
+  deleteUser,
+  updateUser,
 };
