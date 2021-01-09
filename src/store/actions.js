@@ -15,11 +15,21 @@ export const actionTypes = {
   CHANGE_CREATE_CARD_VISIBLE: 'CHANGE_CREATE_CARD_VISIBLE',
   CHANGE_SELECTED_DECKS: 'CHANGE_SELECTED_DECKS',
   CHANGE_EDIT_CARD_VISIBLE: 'CHANGE_EDIT_CARD_VISIBLE',
+  INIT_USER: 'INIT_USER',
+  GET_USER_SUCCESS: 'GET_USER_SUCCESS',
+  GET_USER_FAIL: 'GET_USER_FAIL',
+  ADD_USER: 'ADD_USER',
+  UPDATE_USER: 'UPDATE_USER',
+  DELETE_USER: 'DELETE_USER',
   USER_LOGIN: 'USER_LOGIN',
   USER_LOGOUT: 'USER_LOGOUT',
 };
 
 export const actionCreator = {
+  initUser: (data) => ({ type: actionTypes.INIT_USER, data }), //data - user id
+  addUser: (data) => ({ type: actionTypes.ADD_USER, data }), //data - user obj
+  updateUser: (data) => ({ type: actionTypes.UPDATE_USER, data }), //data - arr [0] - id, [1] - user obj
+  deleteUser: (data) => ({ type: actionTypes.DELETE_USER, data }), //data - user id
   initDecks: () => ({ type: actionTypes.INIT_DECKS }),
   addDeck: (data) => ({ type: actionTypes.ADD_DECK, data }), //data - deck obj
   updateDeck: (data) => ({ type: actionTypes.UPDATE_DECK, data }), //data - arr [0] - id, [1] - deck obj

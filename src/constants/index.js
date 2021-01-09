@@ -16,6 +16,10 @@ const URLS = {
   UPDATE_CARD_BY_ID: `${MAIN_URL}cards/update/`,
   UPDATE_DECK_BY_ID: `${MAIN_URL}decks/update/`,
   GET_CARDS_BY_IDS_ARR: `${MAIN_URL}cards/ids`,
+  GET_USER_BY_ID: `${MAIN_URL}user`,
+  POST_USER: `${MAIN_URL}user/add`,
+  DELETE_USER_BY_ID: `${MAIN_URL}user/`,
+  UPDATE_USER_BY_ID: `${MAIN_URL}user/`,
 };
 
 export { BUTTONS_TEXT, URLS };
