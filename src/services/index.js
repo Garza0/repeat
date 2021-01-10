@@ -19,6 +19,7 @@ const {
 } = URLS;
 
 const getUser = async (userId) => {
+  console.log(userId);
   const user = await axios.get(GET_USER_BY_ID + userId).then((res) => res.data);
   return user;
 };

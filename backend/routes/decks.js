@@ -24,6 +24,14 @@ router.route('/add').post((req, res) => {
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 
+router.route('/ids').get((req, res) => {
+  Deck.find({
+    _id: { $in: [...req.query.ids] },
+  })
+    .then((deck) => res.json(deck))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
+
 router.route('/:id').get((req, res) => {
   Deck.findById(req.params.id)
     .then((deck) => res.json(deck))

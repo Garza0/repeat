@@ -6,10 +6,10 @@ import modalWindowsReducer from './modalWindowsReducer';
 import userReducer from './userReducer';
 
 const rootReducer = combineReducers({
+  userReducer,
   decksReducer,
   cardsReducer,
   modalWindowsReducer,
-  userReducer,
 });
 
 export default rootReducer;

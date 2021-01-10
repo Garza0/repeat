@@ -22,7 +22,9 @@ function App() {
           name: authUser.displayName,
           avatar: authUser.photoURL,
         };
+        console.log(userData.id);
         dispatch(actionCreator.userLogin(userData));
+        dispatch(actionCreator.initUser(userData));
       } else {
         dispatch(actionCreator.userLogout());
       }
