@@ -17,7 +17,7 @@ export default function Decks() {
   const [showModal, setShowModal] = useState(false);
   const [clickedElementId, setClickedElementId] = useState(null);
 
-  const decks = useSelector((state) => state.decksReducer.decks);
+  const decks = useSelector((state) => state.decksReducer.userDecks);
   const decksReversed = [...decks].reverse();
 
   //TODO: modal open close logic

@@ -1,8 +1,28 @@
 import { actionTypes } from '../actions';
-import { getCards, postCard, deleteCard, updateCardById } from '../../services';
+import {
+  getCards,
+  postCard,
+  deleteCard,
+  updateCardById,
+  getCardsByIdsArr,
+} from '../../services';
 
 const middlewareCards = (store) => (next) => async (action) => {
   switch (action.type) {
+    case actionTypes.GET_CARDS_BY_IDS_ARR:
+      try {
+        const data = await getCardsByIdsArr(action.data);
+        store.dispatch({
+          type: actionTypes.GET_USER_CARDS_SUCCESS,
+          data,
+        });
+      } catch (e) {
+        store.dispatch({
+          type: actionTypes.GET_USER_CARDS_FAIL,
+        });
+        console.log(e);
+      }
+      break;
     case actionTypes.INIT_CARDS:
       try {
         const data = await getCards();

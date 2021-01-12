@@ -43,7 +43,6 @@ function CardsTable({ cards, deckId }) {
     const cardData = getCardById(id);
     const changedCardData = removeDeckFromCardDecks(cardData, deckId);
 
-    console.log(deckId, cardData, changedCardData);
     dispatch(actionCreator.updateCard([id, changedCardData]));
   };
 

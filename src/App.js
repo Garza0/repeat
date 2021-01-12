@@ -16,13 +16,13 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        console.log(authUser);
         const userData = {
-          id: authUser.uid,
+          _id: authUser.uid,
           name: authUser.displayName,
           avatar: authUser.photoURL,
+          decks: [],
+          cards: [],
         };
-        console.log(userData.id);
         dispatch(actionCreator.userLogin(userData));
         dispatch(actionCreator.initUser(userData));
       } else {

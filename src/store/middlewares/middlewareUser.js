@@ -1,18 +1,36 @@
 import { actionTypes, actionCreator } from '../actions';
-import { getUser, postUser, deleteUser, updateUser } from '../../services';
+import {
+  getUser,
+  postUser,
+  deleteUser,
+  updateUser,
+  getDecksByIdsArr,
+  getCardsByIdsArr,
+} from '../../services';
 
 const middlewareUser = (store) => (next) => async (action) => {
   switch (action.type) {
     case actionTypes.INIT_USER:
       try {
-        const data = await getUser(action.data.id);
+        const data = await getUser(action.data._id);
         if (!data) {
-          action.data._id = action.data.id;
-          action.data.decks = [];
-          action.data.cards = [];
           store.dispatch(actionCreator.addUser(action.data));
+        } else {
+          if (data.decks.length > 0) {
+            store.dispatch({
+              type: actionTypes.GET_DECKS_BY_IDS_ARR,
+              data: data.decks,
+            });
+          }
+          if (data.cards.length > 0) {
+            const userCards = await getCardsByIdsArr(data.cards);
+            store.dispatch({
+              type: actionTypes.GET_CARDS_BY_IDS_ARR,
+              data: userCards,
+            });
+          }
         }
-        console.log(data);
+
         store.dispatch({
           type: actionTypes.GET_USER_SUCCESS,
           data,

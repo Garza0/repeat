@@ -20,7 +20,7 @@ router.route('/add').post((req, res) => {
 
   newDeck
     .save()
-    .then(() => res.json('Deck added!'))
+    .then(() => res.json(newDeck._id))
     .catch((err) => res.status(400).json('Error: ' + err));
 });
 

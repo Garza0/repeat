@@ -20,7 +20,7 @@ const URLS = {
   GET_USER_BY_ID: `${MAIN_URL}user/`,
   POST_USER: `${MAIN_URL}user/add`,
   DELETE_USER_BY_ID: `${MAIN_URL}user/`,
-  UPDATE_USER_BY_ID: `${MAIN_URL}user/`,
+  UPDATE_USER_BY_ID: `${MAIN_URL}user/update/`,
 };
 
 export { BUTTONS_TEXT, URLS };
