@@ -65,8 +65,8 @@ export default function Decks() {
             onClick={onCreateDeckClick}
           >
             <p>{BUTTONS_TEXT.CREATE_NEW_DECK}</p>
-            <CreateDeckModal />
           </div>
+          <CreateDeckModal />
         </div>
       </div>
       <div>{decksList()}</div>

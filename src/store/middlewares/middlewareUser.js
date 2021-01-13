@@ -23,10 +23,10 @@ const middlewareUser = (store) => (next) => async (action) => {
             });
           }
           if (data.cards.length > 0) {
-            const userCards = await getCardsByIdsArr(data.cards);
+            // const userCards = await getCardsByIdsArr(data.cards);
             store.dispatch({
               type: actionTypes.GET_CARDS_BY_IDS_ARR,
-              data: userCards,
+              data: data.cards,
             });
           }
         }
