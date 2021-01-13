@@ -9,16 +9,17 @@ import { BUTTONS_TEXT } from '../../constants';
 
 export default function Decks() {
   const dispatch = useDispatch();
+  const userDecksIds = useSelector((state) => state.userReducer.user.decks);
 
   useEffect(() => {
-    dispatch(actionCreator.initDecks());
-  }, [dispatch]);
+    dispatch(actionCreator.getUserDecks(userDecksIds));
+  }, [dispatch, userDecksIds]);
 
   const [showModal, setShowModal] = useState(false);
   const [clickedElementId, setClickedElementId] = useState(null);
 
-  const decks = useSelector((state) => state.decksReducer.userDecks);
-  const decksReversed = [...decks].reverse();
+  const userDecks = useSelector((state) => state.decksReducer.userDecks);
+  const decksReversed = userDecks ? [...userDecks].reverse() : [];
 
   //TODO: modal open close logic
   const onModalClick = (e) => {
